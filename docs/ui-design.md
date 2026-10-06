@@ -89,6 +89,14 @@ widgets such as `checkbox`, `slider_row`, `dropdown` and the buttons translate t
 themselves). A test fails when a `tl!` literal, a menu string, a blend mode name or a generated
 preference label has no entry in a language marked `complete_menus`. Not translated: status-bar
 messages and errors (they stay English, also for agents), names that are user data (layers, styles,
-documents), strings assembled with `format!` that were not converted to `fmt`/`trn`. Not done yet:
-per-language font fallback (the CJK fallback prefers Japanese forms), right-to-left layout,
-locale-aware number and date formats, automatic language detection on Windows and the web build.
+documents), strings assembled with `format!` that were not converted to `fmt`/`trn`.
+
+Languages: English, Japanese (`ja`) and Hebrew (`he`). Hebrew uses the bundled Noto Sans Hebrew as
+the UI fallback font. egui shapes each run of Hebrew letters right to left but applies no
+bidirectional algorithm, so the `rtl_text` plugin reorders every drawn row that contains
+right-to-left text into visual order (UAX #9, after wrapping) and right-aligns right-to-left
+paragraphs; catalogs keep text in logical order. Not done yet: mirrored panel layout for
+right-to-left languages (menus, toolbar and docks keep their left-to-right positions), carets
+inside right-to-left text being edited, per-language font fallback (the CJK fallback prefers
+Japanese forms), locale-aware number and date formats, automatic language detection on Windows
+and the web build.

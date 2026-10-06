@@ -49,9 +49,10 @@ fn plural_none(_: u64) -> usize {
 }
 
 /// The registry. English first: it is the fallback and the source language.
-pub static LANGUAGES: [LangInfo; 2] = [
+pub static LANGUAGES: [LangInfo; 3] = [
     LangInfo { code: "en", name: "English", source: "", plural: plural_one_other, complete_menus: false, catalog: OnceLock::new() },
     LangInfo { code: "ja", name: "日本語", source: include_str!("ja.tsv"), plural: plural_none, complete_menus: true, catalog: OnceLock::new() },
+    LangInfo { code: "he", name: "עברית", source: include_str!("he.tsv"), plural: plural_one_other, complete_menus: true, catalog: OnceLock::new() },
 ];
 
 impl LangInfo {
@@ -240,6 +241,7 @@ mod tests {
     use super::*;
 
     const JA: fn() -> Lang = || Lang::from_code("ja").expect("ja registered");
+    const HE: fn() -> Lang = || Lang::from_code("he").expect("he registered");
 
     #[test]
     fn tags_map_to_languages() {
@@ -248,6 +250,8 @@ mod tests {
         assert_eq!(lang_from_tag("en_US.UTF-8"), Some(Lang::EN));
         assert_eq!(lang_from_tag("C"), Some(Lang::EN));
         assert_eq!(lang_from_tag("POSIX"), Some(Lang::EN));
+        assert_eq!(lang_from_tag("he_IL.UTF-8"), Some(HE()));
+        assert_eq!(lang_from_tag("he-IL"), Some(HE()));
         assert_eq!(lang_from_tag("fr_FR"), None);
         assert_eq!(lang_from_tag(""), None);
         assert_eq!(lang_from_tag("_"), None);
@@ -285,6 +289,8 @@ mod tests {
         assert_eq!(tr(JA(), "Layer"), "レイヤー");
         assert_eq!(tr_id(JA(), "no.such.id", "Layer"), "レイヤー");
         assert_eq!(tr_ctx(JA(), "no such context", "Layer"), "レイヤー");
+        assert_eq!(tr(HE(), "Layer"), "שכבה");
+        assert_eq!(tr(HE(), "Save As…"), "שמירה בשם…");
     }
 
     #[test]
@@ -313,6 +319,8 @@ mod tests {
         assert_eq!(trn(Lang::EN, 7, "{n} item", "{n} items"), "7 items");
         assert_eq!(trn(JA(), 1, "{n} item", "{n} items"), "1 件");
         assert_eq!(trn(JA(), 7, "{n} item", "{n} items"), "7 件");
+        assert_eq!(trn(HE(), 1, "{n} item", "{n} items"), "1 פריט");
+        assert_eq!(trn(HE(), 7, "{n} item", "{n} items"), "7 פריטים");
         assert_eq!(fmt("{b} before {a}", &[("a", "x"), ("b", "y"), ("c", "z")]), "y before x");
         assert_eq!(fmt("{missing}", &[]), "{missing}");
         assert_eq!(placeholders("a {x} b {y} {"), ["x", "y"]);

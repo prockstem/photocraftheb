@@ -271,7 +271,8 @@ impl Tokens {
     }
 }
 
-/// Register Inter (UI) and JetBrains Mono (numbers) plus named weights.
+/// Register Inter (UI) and JetBrains Mono (numbers) plus named weights, with Noto Sans Hebrew
+/// as their Hebrew fallback.
 pub fn install_fonts(ctx: &egui::Context) {
     let mut fonts = FontDefinitions::default();
     let add = |fonts: &mut FontDefinitions, name: &str, bytes: &'static [u8]| {
@@ -281,18 +282,27 @@ pub fn install_fonts(ctx: &egui::Context) {
     add(&mut fonts, "Inter-Medium", photocraft_text::fonts::INTER_MEDIUM);
     add(&mut fonts, "Inter-SemiBold", photocraft_text::fonts::INTER_SEMIBOLD);
     add(&mut fonts, "JetBrainsMono", photocraft_text::fonts::JETBRAINS_MONO_REGULAR);
+    add(&mut fonts, "NotoSansHebrew", photocraft_text::fonts::NOTO_SANS_HEBREW_REGULAR);
+    add(&mut fonts, "NotoSansHebrew-Medium", photocraft_text::fonts::NOTO_SANS_HEBREW_MEDIUM);
+    add(&mut fonts, "NotoSansHebrew-SemiBold", photocraft_text::fonts::NOTO_SANS_HEBREW_SEMIBOLD);
     fonts.families.entry(FontFamily::Proportional).or_default().insert(0, "Inter".to_owned());
     fonts.families.entry(FontFamily::Monospace).or_default().insert(0, "JetBrainsMono".to_owned());
+    // Hebrew right after the primary font (Inter and JetBrains Mono have no Hebrew letters).
+    for fam in [FontFamily::Proportional, FontFamily::Monospace] {
+        fonts.families.entry(fam).or_default().insert(1, "NotoSansHebrew".to_owned());
+    }
     // Named weights fall back to the default stack for missing glyphs.
     let fallback: Vec<String> = fonts.families[&FontFamily::Proportional].clone();
-    for (fam, primary) in [("medium", "Inter-Medium"), ("semibold", "Inter-SemiBold")] {
-        let mut stack = vec![primary.to_owned()];
+    for (fam, primary, hebrew) in [("medium", "Inter-Medium", "NotoSansHebrew-Medium"), ("semibold", "Inter-SemiBold", "NotoSansHebrew-SemiBold")] {
+        let mut stack = vec![primary.to_owned(), hebrew.to_owned()];
         stack.extend(fallback.iter().cloned());
         fonts.families.insert(FontFamily::Name(fam.into()), stack);
     }
     ctx.set_fonts(fonts);
     // Japanese / Chinese / Korean system fonts are registered on demand (cjk_fonts.rs).
     crate::cjk_fonts::install(ctx);
+    // egui draws text left to right only; Hebrew rows are put into visual order (rtl_text.rs).
+    crate::rtl_text::install(ctx);
 }
 
 pub fn medium(size: f32) -> FontId {

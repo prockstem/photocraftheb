@@ -21,6 +21,11 @@ pub static INTER_REGULAR: &[u8] = include_bytes!("../../../assets/fonts/Inter-Re
 pub static INTER_MEDIUM: &[u8] = include_bytes!("../../../assets/fonts/Inter-Medium.ttf");
 pub static INTER_SEMIBOLD: &[u8] = include_bytes!("../../../assets/fonts/Inter-SemiBold.ttf");
 pub static JETBRAINS_MONO_REGULAR: &[u8] = include_bytes!("../../../assets/fonts/JetBrainsMono-Regular.ttf");
+// Hebrew (Inter has none): the UI's fallback for the Hebrew interface and Hebrew layer names, and a
+// bundled fallback for Hebrew type, also on the web.
+pub static NOTO_SANS_HEBREW_REGULAR: &[u8] = include_bytes!("../../../assets/fonts/NotoSansHebrew-Regular.ttf");
+pub static NOTO_SANS_HEBREW_MEDIUM: &[u8] = include_bytes!("../../../assets/fonts/NotoSansHebrew-Medium.ttf");
+pub static NOTO_SANS_HEBREW_SEMIBOLD: &[u8] = include_bytes!("../../../assets/fonts/NotoSansHebrew-SemiBold.ttf");
 
 /// Fonts shipped with Photocraft (OFL; licences in `assets/fonts`).
 pub static BUNDLED: &[(&str, &[u8])] = &[
@@ -28,6 +33,9 @@ pub static BUNDLED: &[(&str, &[u8])] = &[
     ("Inter-Medium.ttf", INTER_MEDIUM),
     ("Inter-SemiBold.ttf", INTER_SEMIBOLD),
     ("JetBrainsMono-Regular.ttf", JETBRAINS_MONO_REGULAR),
+    ("NotoSansHebrew-Regular.ttf", NOTO_SANS_HEBREW_REGULAR),
+    ("NotoSansHebrew-Medium.ttf", NOTO_SANS_HEBREW_MEDIUM),
+    ("NotoSansHebrew-SemiBold.ttf", NOTO_SANS_HEBREW_SEMIBOLD),
 ];
 
 /// Families tried (if installed) after the requested one, for missing glyphs. The CJK families

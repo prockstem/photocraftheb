@@ -64,9 +64,9 @@ note = "No bug report dialog in crates"
 [[item]]
 id = "DIST-220-4"
 target = "Translation coverage per language reported by xtask; RTL layout for Arabic and Hebrew"
-status = "missing"
+status = "partial"
 issue = 220
-note = "No i18n in crates or xtask (waits on #169)"
+note = "Hebrew UI (he.tsv, complete menus) with right-to-left text drawn in visual order (ui-egui rtl_text.rs, UAX #9); panel layout is not mirrored and xtask reports no coverage yet"
 
 [[item]]
 id = "DIST-220-5"
