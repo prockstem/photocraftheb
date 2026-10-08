@@ -671,7 +671,7 @@
 	Timeline	ציר זמן
 	Tool Presets	הגדרות מוכנות של כלים
 	Tools	כלים
-	About PhotoCraft	אודות PhotoCraft
+	About Epic Photo	אודות Epic Photo
 	PhotoCraft Website	אתר PhotoCraft
 	PhotoCraft on GitHub	PhotoCraft ב-GitHub
 	ArtCraft Website	אתר ArtCraft
@@ -1191,9 +1191,9 @@
 	Perspective Warp is not active	עיוות הפרספקטיבה אינו פעיל
 	Perspective Warp: draw planes along the image's perspective, then switch to Warp	עיוות פרספקטיבה: ציירו מישורים לאורך הפרספקטיבה של התמונה, ואז עברו לעיוות
 	Photo Filter	מסנן צילום
-	PhotoCraft	PhotoCraft
-	PhotoCraft Manages Colors	PhotoCraft מנהל את הצבעים
-	PhotoCraft — an open-source, native image editor written in Rust.	PhotoCraft — עורך תמונות מקומי בקוד פתוח, כתוב ב-Rust.
+	Epic Photo	Epic Photo
+	Epic Photo Manages Colors	Epic Photo מנהל את הצבעים
+	Epic Photo — an open-source, native image editor written in Rust, based on PhotoCraft.	Epic Photo — עורך תמונות מקומי בקוד פתוח, כתוב ב-Rust, מבוסס על PhotoCraft.
 	Pin Depth:	עומק סיכה:
 	Pixel Length:	אורך בפיקסלים:
 	Pixels/Centimeter	פיקסלים/סנטימטר
@@ -1881,7 +1881,7 @@
 	System Info…	מידע מערכת…
 	System Info	מידע מערכת
 	More panels	חלוניות נוספות
-	These settings aren't available in PhotoCraft yet.	ההגדרות האלה עדיין לא זמינות ב-PhotoCraft.
+	These settings aren't available in Epic Photo yet.	ההגדרות האלה עדיין לא זמינות ב-Epic Photo.
 	Graphics	גרפיקה
 	Reset GPU Backend	איפוס מנוע ה-GPU
 	Applies at next launch.	ייכנס לתוקף בהפעלה הבאה.

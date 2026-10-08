@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  PhotoCraft MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
+  Epic Photo MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
 
     wix build photocraft.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
 
-  Per-machine install into Program Files, a Start Menu shortcut, `.pcraft` owned by PhotoCraft,
-  and PhotoCraft offered under "Open with" for PSD/PSB and the image formats it reads (without
+  Per-machine install into Program Files, a Start Menu shortcut, `.pcraft` owned by Epic Photo,
+  and Epic Photo offered under "Open with" for PSD/PSB and the image formats it reads (without
   taking over the user's default app for them).
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
-      Name="PhotoCraft"
-      Manufacturer="Learning Machines LLC"
+      Name="Epic Photo"
+      Manufacturer="prockstem"
       Version="$(var.Version)"
-      UpgradeCode="D9660F32-2D0A-4ABE-B73D-17BE25F1542C"
+      UpgradeCode="B0D56A48-7E0D-4CE4-A8FB-648BA59FC12A"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="PhotoCraft image editor" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="Epic Photo image editor" Manufacturer="prockstem" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
-        DowngradeErrorMessage="A newer version of PhotoCraft is already installed." />
+        DowngradeErrorMessage="A newer version of Epic Photo is already installed." />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
     <!-- MSI caches this icon using its Id as the filename. Advertised shortcuts to an
          .exe need an .exe icon identifier (ICE50), even when the source is an ICO. -->
     <Icon Id="PhotocraftIcon.exe" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="PhotocraftIcon.exe" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/photocraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/photocraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/prockstem/photocraftheb" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://github.com/prockstem/photocraftheb" />
     <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
-      <Directory Id="INSTALLFOLDER" Name="PhotoCraft" />
+      <Directory Id="INSTALLFOLDER" Name="Epic Photo" />
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder" />
 
-    <Feature Id="Main" Title="PhotoCraft" Level="1">
+    <Feature Id="Main" Title="Epic Photo" Level="1">
       <ComponentGroupRef Id="PhotocraftFiles" />
     </Feature>
   </Package>
@@ -46,13 +46,13 @@
     <ComponentGroup Id="PhotocraftFiles" Directory="INSTALLFOLDER">
       <Component Id="PhotocraftApp" Guid="A6DE41B7-A80F-4C59-A17E-BB68065BF67E">
         <File Id="PhotocraftExe" Source="$(var.BinDir)\photocraft.exe" KeyPath="yes">
-          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="PhotoCraft"
-              Description="PhotoCraft image editor" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="Epic Photo"
+              Description="Epic Photo image editor" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
               Icon="PhotocraftIcon.exe" IconIndex="0" />
         </File>
 
-        <!-- .pcraft: PhotoCraft's own format; PhotoCraft is its default app. -->
-        <ProgId Id="Photocraft.Document" Description="PhotoCraft Document" Icon="PhotocraftExe" IconIndex="0">
+        <!-- .pcraft: Epic Photo's own format; Epic Photo is its default app. -->
+        <ProgId Id="Photocraft.Document" Description="Epic Photo Document" Icon="PhotocraftExe" IconIndex="0">
           <Extension Id="pcraft" ContentType="application/x-photocraft">
             <Verb Id="open" Command="Open" TargetFile="PhotocraftExe" Argument="&quot;%1&quot;" />
           </Extension>
@@ -80,7 +80,7 @@
         <RegistryValue Root="HKLM" Key="Software\Classes\.ico\OpenWithProgids" Name="Photocraft.Image" Value="" Type="string" />
 
         <!-- "Open with" app list and the Run dialog (Win+R "photocraft"). -->
-        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\photocraft.exe" Name="FriendlyAppName" Value="PhotoCraft" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Classes\Applications\photocraft.exe" Name="FriendlyAppName" Value="Epic Photo" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Classes\Applications\photocraft.exe\shell\open\command" Value="&quot;[#PhotocraftExe]&quot; &quot;%1&quot;" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Classes\Applications\photocraft.exe\SupportedTypes" Name=".pcraft" Value="" Type="string" />
         <RegistryValue Root="HKLM" Key="Software\Classes\Applications\photocraft.exe\SupportedTypes" Name=".psd" Value="" Type="string" />

@@ -1,5 +1,5 @@
 # Release pipeline: every push to `release` builds signed installers for every platform and
-# creates or updates the draft GitHub Release "PhotoCraft v<version>". See docs/releasing.md.
+# creates or updates the draft GitHub Release "Epic Photo v<version>". See docs/releasing.md.
 #
 # All jobs run in the `release` environment (restricted to the `release` branch), which holds
 # the signing secrets. Every secret is optional: missing ones produce unsigned artifacts and a
@@ -58,7 +58,7 @@ jobs:
             echo "date=$(date -u +%Y-%m-%d)"
             echo "prerelease=$pre"
           } >>"$GITHUB_OUTPUT"
-          echo "### PhotoCraft v$v (\`${GITHUB_SHA::9}\`)" >>"$GITHUB_STEP_SUMMARY"
+          echo "### Epic Photo v$v (\`${GITHUB_SHA::9}\`)" >>"$GITHUB_STEP_SUMMARY"
 
   macos:
     name: macOS universal
@@ -190,7 +190,7 @@ jobs:
           dpkg-deb --info dist/release/*.deb
           dpkg-deb --contents dist/release/*.deb | grep -E 'usr/bin/photocraft$|metainfo|applications'
           ldd target/release/photocraft
-          python3 -c "import yaml; m = yaml.safe_load(open('packaging/linux/flatpak/ai.storyteller.photocraft.yml')); assert m['id'] == 'ai.storyteller.photocraft'"
+          python3 -c "import yaml; m = yaml.safe_load(open('packaging/linux/flatpak/io.github.prockstem.epicphoto.yml')); assert m['id'] == 'io.github.prockstem.epicphoto'"
           for appimage in dist/release/*.AppImage; do
             chmod +x "$appimage"
             APPIMAGE_EXTRACT_AND_RUN=1 "$appimage" --version
@@ -319,6 +319,9 @@ jobs:
   release:
     name: Draft GitHub Release
     needs: [version, macos, windows, linux, flatpak, freebsd, web]
+    # The desktop installers are what users need; FreeBSD, Flatpak and web are extras that must not
+    # hold the release back when one of them fails.
+    if: ${{ !cancelled() && needs.macos.result == 'success' && needs.windows.result == 'success' && needs.linux.result == 'success' }}
     runs-on: ubuntu-latest
     environment: release
     permissions:
@@ -334,6 +337,29 @@ jobs:
           pattern: release-*
           path: artifacts
           merge-multiple: true
+      - uses: actions/checkout@v4
+        with:
+          path: src
+          sparse-checkout: packaging/INSTALL-README.md
+          sparse-checkout-cone-mode: false
+      - name: Per-platform zips with install instructions
+        working-directory: artifacts
+        run: |
+          app="Epic Photo"; file=photocraft; zipname="Epic-Photo-$VERSION"
+          sed -e "s/@APP@/$app/g" -e "s/@VERSION@/$VERSION/g" -e "s/@APP_FILE@/$file/g" \
+            ../src/packaging/INSTALL-README.md >README.md
+          bundle() { # bundle NAME GLOB...
+            local name="$1"; shift
+            local files=()
+            for g in "$@"; do for f in $g; do [ -e "$f" ] && files+=("$f"); done; done
+            if [ "${#files[@]}" -eq 0 ]; then echo "::warning::no files for $name"; return; fi
+            zip -9 "$name" README.md "${files[@]}"
+          }
+          bundle "$zipname-Windows.zip" "$file-*-windows-*.msi" "$file-*-windows-*-portable.zip"
+          bundle "$zipname-macOS.zip" "$file-*-macos-*.dmg"
+          bundle "$zipname-Linux.zip" "$file-*-linux-*.AppImage" "$file-*-linux-*.deb" "$file-*-linux-*.rpm"
+          rm README.md
+          ls -la
       - name: Checksums
         working-directory: artifacts
         run: |
@@ -342,7 +368,7 @@ jobs:
         working-directory: artifacts
         run: |
           tag="v$VERSION"
-          title="PhotoCraft v$VERSION"
+          title="Epic Photo v$VERSION"
           pre=()
           if [ "$PRERELEASE" = true ]; then pre=(--prerelease); fi
           if draft="$(gh release view "$tag" --json isDraft --jq .isDraft 2>/dev/null)"; then

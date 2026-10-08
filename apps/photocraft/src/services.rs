@@ -23,7 +23,7 @@ const OPEN_EXTS: &[&str] = &[
 /// extension comes first, so a .pcraft document saves as .pcraft by default and everything else
 /// keeps defaulting to Photoshop.
 const SAVE_FILTERS: &[(&str, &[&str])] =
-    &[("Photoshop", &["psd", "psb"]), ("PhotoCraft", &["pcraft"]), ("PNG", &["png"]), ("JPEG", &["jpg"]), ("TIFF", &["tif"]), ("OpenEXR", &["exr"])];
+    &[("Photoshop", &["psd", "psb"]), ("Epic Photo", &["pcraft"]), ("PNG", &["png"]), ("JPEG", &["jpg"]), ("TIFF", &["tif"]), ("OpenEXR", &["exr"])];
 
 /// [`SAVE_FILTERS`] with the one for `suggested`'s extension first.
 fn save_filters(suggested: &str) -> Vec<(&'static str, &'static [&'static str])> {
@@ -95,7 +95,7 @@ pub fn native(automation: Option<photocraft_automation::AuthorizedWorkspace>) ->
             crate::crash_guard::guard("Export", || photocraft_io::export(doc, path, &opts).map(|r| (r.bytes, r.warnings)).map_err(|e| e.to_string()))
         })),
         pick_open: Some(Box::new(|| {
-            let path = rfd::FileDialog::new().add_filter("All Formats", OPEN_EXTS).add_filter("PhotoCraft", &["pcraft"]).pick_file()?;
+            let path = rfd::FileDialog::new().add_filter("All Formats", OPEN_EXTS).add_filter("Epic Photo", &["pcraft"]).pick_file()?;
             let bytes = std::fs::read(&path).ok()?;
             Some((path.to_string_lossy().to_string(), bytes))
         })),

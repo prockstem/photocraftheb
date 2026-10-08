@@ -67,7 +67,7 @@ pub fn fall_back(app: &mut PhotocraftApp, fault: &photocraft_gpu::Fault) {
 /// Help › System Info: version, platform and the graphics state.
 pub fn system_info(app: &PhotocraftApp) -> Vec<String> {
     let mut v =
-        vec![format!("PhotoCraft {}", photocraft_engine::build_info::long_version()), format!("Platform: {} {}", std::env::consts::OS, std::env::consts::ARCH)];
+        vec![format!("Epic Photo {}", photocraft_engine::build_info::long_version()), format!("Platform: {} {}", std::env::consts::OS, std::env::consts::ARCH)];
     v.extend(app.perf.gpu_info.lines());
     v
 }

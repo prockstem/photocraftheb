@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build and package PhotoCraft for Linux (<arch> is x86_64 or aarch64):
+# Build and package Epic Photo for Linux (<arch> is x86_64 or aarch64):
 #
 #   $DIST/photocraft-<version>-linux-<arch>.AppImage  any distro with glibc >= the build host's
 #   $DIST/photocraft-<version>-linux-<arch>.deb       Debian, Ubuntu, Mint, Pop!_OS, ...
@@ -15,7 +15,7 @@ set -euo pipefail
 # shellcheck source=../env.sh
 . "$(dirname "${BASH_SOURCE[0]}")/../env.sh"
 HERE="$ROOT/packaging/linux"
-APP_ID=ai.storyteller.photocraft
+APP_ID=io.github.prockstem.epicphoto
 
 SKIP_BUILD=0
 FORMATS="appimage deb rpm tar"
@@ -34,10 +34,10 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export PHOTOCRAFT_MAINTAINER="${PHOTOCRAFT_MAINTAINER:-PhotoCraft maintainers <photocraft@storyteller.ai>}"
+export PHOTOCRAFT_MAINTAINER="${PHOTOCRAFT_MAINTAINER:-Epic Photo maintainers <prockstem@users.noreply.github.com>}"
 BASENAME="photocraft-$VERSION-linux-$ARCH"
 
-echo "==> PhotoCraft $VERSION for Linux $ARCH ($FORMATS)"
+echo "==> Epic Photo $VERSION for Linux $ARCH ($FORMATS)"
 
 if [ "$SKIP_BUILD" = 0 ]; then
   (cd "$ROOT" && cargo build --release --locked -p photocraft -p photocraft-cli)
@@ -92,7 +92,7 @@ fi
 
 # ---- AppImage -----------------------------------------------------------------------------------
 if has appimage; then
-  APPDIR="$WORK/PhotoCraft.AppDir"
+  APPDIR="$WORK/Epic Photo.AppDir"
   cp -R "$STAGE" "$APPDIR"
   mv "$APPDIR/usr/share/doc" "$WORK/doc-unused"
   ln -s usr/bin/photocraft "$APPDIR/AppRun"

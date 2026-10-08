@@ -669,7 +669,7 @@
 	Timeline	タイムライン
 	Tool Presets	ツールプリセット
 	Tools	ツール
-	About PhotoCraft	PhotoCraft について
+	About Epic Photo	Epic Photo について
 	PhotoCraft Website	PhotoCraft の Web サイト
 	PhotoCraft on GitHub	GitHub 上の PhotoCraft
 	ArtCraft Website	ArtCraft の Web サイト
@@ -1191,9 +1191,9 @@
 	Perspective Warp is not active	遠近法ワープは有効ではありません
 	Perspective Warp: draw planes along the image's perspective, then switch to Warp	遠近法ワープ: 画像の遠近に沿って面を描き、ワープに切り替えます
 	Photo Filter	写真フィルター
-	PhotoCraft	PhotoCraft
-	PhotoCraft Manages Colors	PhotoCraft でカラーを管理
-	PhotoCraft — an open-source, native image editor written in Rust.	PhotoCraft — Rust で書かれた、オープンソースのネイティブ画像エディター。
+	Epic Photo	Epic Photo
+	Epic Photo Manages Colors	Epic Photo でカラーを管理
+	Epic Photo — an open-source, native image editor written in Rust, based on PhotoCraft.	Epic Photo — Rust で書かれた、オープンソースのネイティブ画像エディター（PhotoCraft ベース）。
 	Pin Depth:	ピンの深さ:
 	Pixel Length:	ピクセル長:
 	Pixels/Centimeter	ピクセル/センチメートル
@@ -1891,7 +1891,7 @@
 	System Info…	システム情報…
 	System Info	システム情報
 	More panels	その他のパネル
-	These settings aren't available in PhotoCraft yet.	これらの設定は PhotoCraft ではまだ使用できません。
+	These settings aren't available in Epic Photo yet.	これらの設定は Epic Photo ではまだ使用できません。
 	Graphics	グラフィックス
 	Reset GPU Backend	GPU バックエンドをリセット
 	Applies at next launch.	次回の起動時に適用されます。

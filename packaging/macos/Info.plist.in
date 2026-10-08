@@ -7,13 +7,13 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleDisplayName</key>
-  <string>PhotoCraft</string>
+  <string>Epic Photo</string>
   <key>CFBundleName</key>
-  <string>PhotoCraft</string>
+  <string>Epic Photo</string>
   <key>CFBundleExecutable</key>
-  <string>PhotoCraft</string>
+  <string>Epic Photo</string>
   <key>CFBundleIdentifier</key>
-  <string>ai.storyteller.photocraft</string>
+  <string>io.github.prockstem.epicphoto</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundlePackageType</key>
@@ -29,7 +29,7 @@
   <key>PhotoCraftBuildCommit</key>
   <string>@BUILD_SHA@</string>
   <key>CFBundleIconFile</key>
-  <string>PhotoCraft</string>
+  <string>Epic Photo</string>
   <key>LSApplicationCategoryType</key>
   <string>public.app-category.graphics-design</string>
   <!-- Must match MACOSX_DEPLOYMENT_TARGET in package.sh. Big Sur is the first release on
@@ -50,16 +50,16 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.photocraft.document</string>
+      <string>io.github.prockstem.epicphoto.document</string>
       <key>UTTypeDescription</key>
-      <string>PhotoCraft Document</string>
+      <string>Epic Photo Document</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
         <string>public.image</string>
       </array>
       <key>UTTypeIconFile</key>
-      <string>PhotoCraft</string>
+      <string>Epic Photo</string>
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.filename-extension</key>
@@ -90,7 +90,7 @@
     </dict>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>ai.storyteller.photocraft.qoi</string>
+      <string>io.github.prockstem.epicphoto.qoi</string>
       <key>UTTypeDescription</key>
       <string>QOI Image</string>
       <key>UTTypeConformsTo</key>
@@ -110,15 +110,15 @@
   <array>
     <dict>
       <key>CFBundleTypeName</key>
-      <string>PhotoCraft Document</string>
+      <string>Epic Photo Document</string>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>LSHandlerRank</key>
       <string>Owner</string>
       <key>CFBundleTypeIconFile</key>
-      <string>PhotoCraft</string>
+      <string>Epic Photo</string>
       <key>LSItemContentTypes</key>
-      <array><string>ai.storyteller.photocraft.document</string></array>
+      <array><string>io.github.prockstem.epicphoto.document</string></array>
     </dict>
     <dict>
       <key>CFBundleTypeName</key>
@@ -154,7 +154,7 @@
         <string>com.ilm.openexr-image</string>
         <string>public.radiance</string>
         <string>public.avif</string>
-        <string>ai.storyteller.photocraft.qoi</string>
+        <string>io.github.prockstem.epicphoto.qoi</string>
       </array>
     </dict>
   </array>

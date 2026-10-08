@@ -7,7 +7,7 @@ maintainer publishes it.
 
 This is PhotoCraft's implementation of the shared
 [release playbook](release-playbook.md). User-facing names say **PhotoCraft**. Files, binaries
-and ids stay lowercase (`photocraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.photocraft`).
+and ids stay lowercase (`photocraft-<version>-<platform>-<arch>.<ext>`, `io.github.prockstem.epicphoto`).
 
 ## Cutting a release
 
@@ -66,7 +66,7 @@ Every binary reports its version, the commit and the build date: `photocraft --v
 `packaging/macos/package.sh` builds `aarch64-apple-darwin` and `x86_64-apple-darwin` with
 `MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo`, and assembles `PhotoCraft.app`:
 
-- `Info.plist` is generated from `Info.plist.in`. The bundle id is `ai.storyteller.photocraft`.
+- `Info.plist` is generated from `Info.plist.in`. The bundle id is `io.github.prockstem.epicphoto`.
   The plist sets `LSMinimumSystemVersion` 11.0, `NSHighResolutionCapable`, and document types:
   `.pcraft` (Owner), plus PSD/PSB and the image formats PhotoCraft reads (Alternate, so it never
   takes over Preview's defaults). The icon is `assets/app-icon/photocraft.icns`.
@@ -130,7 +130,7 @@ Locally on Windows: `dotnet tool install -g wix --version 5.0.2`, then
 ### Linux
 
 `packaging/linux/package.sh` stages one FHS tree and makes every format from it. The tree
-holds both binaries, `ai.storyteller.photocraft.desktop`, hicolor icons from 16 px to 512 px
+holds both binaries, `io.github.prockstem.epicphoto.desktop`, hicolor icons from 16 px to 512 px
 plus a scalable SVG, AppStream metainfo, and a shared-mime-info file for `.pcraft`, `.psb` and
 `.qoi`.
 
@@ -149,7 +149,7 @@ Why these formats:
 - **Flatpak bundle** (`.flatpak`) is a single file that installs into Flatpak, sandboxed and
   updatable by installing a newer bundle, for people who prefer Flatpak to AppImage.
   `packaging/linux/flatpak-bundle.sh` repackages the job's `.tar.gz` with
-  `packaging/linux/flatpak/ai.storyteller.photocraft.bundle.yml` on the freedesktop 26.08
+  `packaging/linux/flatpak/io.github.prockstem.epicphoto.bundle.yml` on the freedesktop 26.08
   runtime. It does no Rust build and needs no network inside `flatpak-builder`, so the bundle
   holds the same binaries as the other formats. A separate `flatpak` job per architecture
   (`ubuntu-24.04` and `ubuntu-24.04-arm`, for flatpak-builder 1.4) downloads the Linux job's
@@ -159,17 +159,17 @@ Why these formats:
 
   ```sh
   flatpak install --user photocraft-<v>-linux-x86_64.flatpak   # pulls org.freedesktop.Platform//26.08 from Flathub if missing
-  flatpak run ai.storyteller.photocraft
+  flatpak run io.github.prockstem.epicphoto
   ```
 
   Sandbox permissions (justified in the manifest): Wayland with X11 fallback, IPC (X11
   shared memory), `dri` for the GPU, and read/write access to Pictures and Documents. Every
   other file goes through the file-chooser and document portals. There's no network, so the
   `--control` server is only reachable from inside the sandbox until the user runs
-  `flatpak override --user --share=network ai.storyteller.photocraft`. Host fonts are read from
+  `flatpak override --user --share=network io.github.prockstem.epicphoto`. Host fonts are read from
   `/run/host/fonts` and `/run/host/user-fonts`. Locally (on Linux, with `flatpak` and
   `flatpak-builder`): `packaging/linux/package.sh --formats tar && packaging/linux/flatpak-bundle.sh`.
-- **Flathub**: `packaging/linux/flatpak/ai.storyteller.photocraft.yml` builds from source and
+- **Flathub**: `packaging/linux/flatpak/io.github.prockstem.epicphoto.yml` builds from source and
   is ready for a Flathub submission (it keeps the same runtime and `finish-args` as the bundle
   manifest, which packaging-lint checks). CI doesn't build it. A real build needs vendored crate
   sources (`cargo-sources.json` from `flatpak-cargo-generator.py`) and adds 20+ minutes per

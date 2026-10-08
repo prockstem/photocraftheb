@@ -57,7 +57,7 @@ pub const UI_COMMANDS: &[(&str, &str, &[&str], Option<&str>)] = &[
     ("help.github", "PhotoCraft on GitHub", &["Help"], None),
     ("help.reportIssue", "Report an Issue…", &["Help"], None),
     ("help.systemInfo", "System Info…", &["Help"], None),
-    ("help.about", "About PhotoCraft", &["Help"], None),
+    ("help.about", "About Epic Photo", &["Help"], None),
 ];
 
 /// Photoshop's Window › <panel> ids for the panels the shell already has, as `window.toggle.*`.

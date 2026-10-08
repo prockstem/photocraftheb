@@ -1,36 +1,23 @@
-<p align="center">
-  <a href="https://getartcraft.com/">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/brand/artcraft-logo-white.svg">
-      <img alt="ArtCraft" src="docs/brand/artcraft-logo.svg" width="200">
-    </picture>
-  </a>
-</p>
+<h1 align="center">Epic Photo</h1>
 
-<h1 align="center">PhotoCraft</h1>
-
-<p align="center">
-  <b>Image editing; an open-source, clean-room reimplementation of Adobe Photoshop, rebuilt in pure Rust.</b><br>
-  Layers, masks, adjustment layers, layer styles, type, vectors, brushes and real PSD files,<br>
-  in a native app written entirely in Rust. Open source, offline, and yours.
+<p align="center" dir="rtl">
+  <b>Epic Photo (חלופה ל-Photoshop)</b><br>
+  עריכת תמונות ועיבוד גרפי. מתאים לריטוש, לקומפוזיציה ולכל מה שביניהם, בלי לשלם על כל חודש שבו פתחתם את התוכנה.
 </p>
 
 <p align="center">
-  <img alt="100% Rust" src="https://img.shields.io/badge/100%25-Rust-b7410e?style=flat-square&logo=rust">
-  <img alt="macOS · Windows · Linux · FreeBSD · Web" src="https://img.shields.io/badge/macOS%20%C2%B7%20Windows%20%C2%B7%20Linux%20%C2%B7%20FreeBSD%20%C2%B7%20Web-native-2f7bf5?style=flat-square">
-  <img alt="License: MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20%2F%20Apache--2.0-3a3a3a?style=flat-square">
-  <img alt="Status: early alpha" src="https://img.shields.io/badge/status-early%20alpha-d69e2e?style=flat-square">
+  Image editing in Hebrew and English: layers, masks, adjustment layers, layer styles, type,
+  vectors, brushes and real PSD files, in a native app. Open source, offline, and yours.
 </p>
 
 <p align="center">
-  <a href="https://discord.gg/artcraft"><img alt="Join the ArtCraft community on Discord" src="https://img.shields.io/badge/Join%20us%20on%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
+  <b>Download:</b> see <a href="https://github.com/prockstem/photocraftheb/releases">Releases</a>
+  (Windows, macOS and Linux zips, each with installation instructions).
 </p>
 
-<p align="center">
-  <a href="https://getartcraft.com/apps/photocraft"><b>PhotoCraft on getartcraft.com</b></a> ·
-  <a href="https://getartcraft.com/">ArtCraft</a> ·
-  <a href="https://getartcraft.com/apps">All Crafting Apps</a>
-</p>
+> [!NOTE]
+> Epic Photo is based on [PhotoCraft](https://github.com/storytold/photocraft), an open-source
+> (MIT OR Apache-2.0) image editor. The sections below describe the PhotoCraft engine it is built on.
 
 <br>
 
@@ -261,7 +248,7 @@ Installers for macOS, Windows, Linux, FreeBSD and the web are attached to each [
 
 ```sh
 flatpak install --user photocraft-<version>-linux-x86_64.flatpak   # or -linux-aarch64
-flatpak run ai.storyteller.photocraft
+flatpak run io.github.prockstem.epicphoto
 ```
 
 On FreeBSD 14 (x86_64), the release has a tarball laid out like `/usr/local`. Install the runtime libraries, then unpack it there:
@@ -300,7 +287,7 @@ stand on its own.
 
 | | App | What it's for | Code | Learn more |
 |:-:|---|---|---|---|
-| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.photocraft.png" alt="" width="32" height="32"> | **PhotoCraft** | **Image editing: layers, masks, type and real PSD files · you are here** | [GitHub](https://github.com/storytold/photocraft) | [Website](https://getartcraft.com/apps/photocraft) |
+| <img src="https://raw.githubusercontent.com/storytold/photocraft/main/assets/app-icon/hicolor/64x64/apps/io.github.prockstem.epicphoto.png" alt="" width="32" height="32"> | **PhotoCraft** | **Image editing: layers, masks, type and real PSD files · you are here** | [GitHub](https://github.com/storytold/photocraft) | [Website](https://getartcraft.com/apps/photocraft) |
 | <img src="https://raw.githubusercontent.com/storytold/vectorcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.vectorcraft.png" alt="" width="32" height="32"> | **VectorCraft** | Vector illustration | [GitHub](https://github.com/storytold/vectorcraft) | [Website](https://getartcraft.com/apps/vectorcraft) |
 | <img src="https://raw.githubusercontent.com/storytold/filmcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png" alt="" width="32" height="32"> | **FilmCraft** | Video editing, color and sound | [GitHub](https://github.com/storytold/filmcraft) | [Website](https://getartcraft.com/apps/filmcraft) |
 | <img src="https://raw.githubusercontent.com/storytold/lightcraft/main/assets/app-icon/hicolor/64x64/apps/ai.storyteller.lightcraft.png" alt="" width="32" height="32"> | **LightCraft** | Photo library and raw development | [GitHub](https://github.com/storytold/lightcraft) | [Website](https://getartcraft.com/apps/lightcraft) |

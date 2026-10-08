@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build, sign and (optionally) notarize the macOS release artifacts:
 #
-#   $DIST/photocraft-<version>-macos-<arch>.dmg          PhotoCraft.app on a drag-to-Applications DMG
+#   $DIST/photocraft-<version>-macos-<arch>.dmg          Epic Photo.app on a drag-to-Applications DMG
 #   $DIST/photocraft-cli-<version>-macos-<arch>.zip      the headless CLI
 #
 # Usage: packaging/macos/package.sh [--arch universal|aarch64|x86_64] [--skip-build]
@@ -39,7 +39,7 @@ export MACOSX_DEPLOYMENT_TARGET=11.0
 IDENTITY="${MACOS_SIGN_IDENTITY:--}"
 SHORT_VERSION="${VERSION%%-*}"
 WORK="$CARGO_TARGET_DIR/macos-package"
-APP="$WORK/PhotoCraft.app"
+APP="$WORK/Epic Photo.app"
 DMG="$DIST/photocraft-$VERSION-macos-$ARCH.dmg"
 CLI_ZIP="$DIST/photocraft-cli-$VERSION-macos-$ARCH.zip"
 
@@ -52,7 +52,7 @@ else
   warn "macOS: APPLE_ID / APPLE_PASSWORD / APPLE_TEAM_ID incomplete; signed but not notarized"
 fi
 
-echo "==> PhotoCraft $VERSION for macOS ($ARCH), identity: $IDENTITY, notarize: $NOTARIZE"
+echo "==> Epic Photo $VERSION for macOS ($ARCH), identity: $IDENTITY, notarize: $NOTARIZE"
 
 # ---- build -------------------------------------------------------------------------------------
 if [ "$SKIP_BUILD" = 0 ]; then
@@ -97,12 +97,12 @@ notarize() {
   fi
 }
 
-# ---- PhotoCraft.app ----------------------------------------------------------------------------
+# ---- Epic Photo.app ----------------------------------------------------------------------------
 echo "==> assembling $APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 # Executable and icon carry the display name (CFBundleExecutable / CFBundleIconFile).
-cp "$WORK/bin/photocraft" "$APP/Contents/MacOS/PhotoCraft"
-cp "$ROOT/assets/app-icon/photocraft.icns" "$APP/Contents/Resources/PhotoCraft.icns"
+cp "$WORK/bin/photocraft" "$APP/Contents/MacOS/Epic Photo"
+cp "$ROOT/assets/app-icon/photocraft.icns" "$APP/Contents/Resources/Epic Photo.icns"
 sed -e "s/@VERSION@/$VERSION/g" -e "s/@SHORT_VERSION@/$SHORT_VERSION/g" \
   -e "s/@BUILD_SHA@/${PHOTOCRAFT_BUILD_SHA:-unknown}/g" \
   "$HERE/Info.plist.in" >"$APP/Contents/Info.plist"
@@ -111,13 +111,13 @@ printf 'APPL????' >"$APP/Contents/PkgInfo"
 
 # Sign inside-out: nested code first, then the bundle itself (no --deep on the final signature).
 # Today the only nested code is the main executable; frameworks/helpers would be signed here too.
-sign --options runtime --entitlements "$HERE/entitlements.plist" "$APP/Contents/MacOS/PhotoCraft"
+sign --options runtime --entitlements "$HERE/entitlements.plist" "$APP/Contents/MacOS/Epic Photo"
 sign --options runtime --entitlements "$HERE/entitlements.plist" "$APP"
 codesign --verify --strict --deep --verbose=2 "$APP"
 
 if [ "$NOTARIZE" = 1 ]; then
-  ditto -c -k --keepParent "$APP" "$WORK/PhotoCraft-notarize.zip"
-  notarize "$WORK/PhotoCraft-notarize.zip"
+  ditto -c -k --keepParent "$APP" "$WORK/Epic Photo-notarize.zip"
+  notarize "$WORK/Epic Photo-notarize.zip"
   xcrun stapler staple "$APP"
   xcrun stapler validate "$APP"
   spctl --assess --type execute -vvv "$APP"
@@ -127,12 +127,12 @@ fi
 echo "==> building $DMG"
 STAGE="$WORK/dmg"
 mkdir -p "$STAGE"
-ditto "$APP" "$STAGE/PhotoCraft.app"
+ditto "$APP" "$STAGE/Epic Photo.app"
 ln -s /Applications "$STAGE/Applications"
 rm -f "$DMG" "$WORK/raw.dmg"
 # makehybrid + convert builds the image without attaching a device, unlike `create -srcfolder`,
 # which is flaky on CI runners ("Resource busy") and hangs in sandboxed sessions.
-hdiutil makehybrid -hfs -hfs-volume-name "PhotoCraft $VERSION" -hfs-openfolder "$STAGE" -o "$WORK/raw.dmg" "$STAGE"
+hdiutil makehybrid -hfs -hfs-volume-name "Epic Photo $VERSION" -hfs-openfolder "$STAGE" -o "$WORK/raw.dmg" "$STAGE"
 hdiutil convert "$WORK/raw.dmg" -format UDZO -imagekey zlib-level=9 -o "$DMG"
 rm -f "$WORK/raw.dmg"
 sign "$DMG"

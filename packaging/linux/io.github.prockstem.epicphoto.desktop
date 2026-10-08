@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=PhotoCraft
+Name=Epic Photo
 GenericName=Image Editor
 Comment=Edit photos and layered PSD documents
 Exec=photocraft %F
 TryExec=photocraft
-Icon=ai.storyteller.photocraft
+Icon=io.github.prockstem.epicphoto
 Terminal=false
 StartupNotify=true
 StartupWMClass=photocraft
